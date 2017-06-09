@@ -24,7 +24,7 @@
       "src": "test/TestPOST"
     },
     {
-      "src": "test/TesPUT"
+      "src": "test/TestPUT"
     },
     {
       "src": "test/TestDELETE"

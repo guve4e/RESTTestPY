@@ -1,0 +1,20 @@
+{
+  "method": "DELETE",
+  "controller": "Test",
+  "data": {
+    "key": "value",
+    "key2": "value"
+  },
+  "schema": {
+    "code": "204",
+    "type": "",
+    "print": {
+      "type": "object",
+      "properties": {
+        "method": { "type": "string" },
+        "message": { "type": "string" }
+       },
+       "required": ["method"]
+    }
+  }
+}
