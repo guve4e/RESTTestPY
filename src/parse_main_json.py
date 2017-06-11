@@ -1,11 +1,20 @@
 #!/usr/bin/python3
-from src.parsejson import ParseJson
+from src.parse_json import ParseJson
 from config import *
 
 
 class ParseMainJson(ParseJson):
     """
-    Class that parses Main json
+    This class parses Main json file -> test.json
+    It inherits from PareJson since it parses a json file,
+    but specific json file.
+    
+    It has 5 members:
+        1. json_file - os.Path object representing the path to the main json file
+        2. api_base - str representing the base of the url extracted from the test json file
+        3. variables_list - list of api variables extracted from the test json file
+        4. headers_list - list of headers extracted from the test json file
+        5. test_cases_list - list of test cases extracted from the test json file
     """
     def __init__(self, file_name) -> None:
         """

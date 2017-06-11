@@ -5,7 +5,10 @@ import os
 
 class ParseJson(object):
     """
-    Class parses json
+    Class that parses json file
+    It has two members:
+        1. json_file - the name of the json file to be parsed
+        2. json_data - the extracted data from the json file
     """
 
     def __init__(self, json_file) -> None:
@@ -15,12 +18,12 @@ class ParseJson(object):
         """
         super().__init__()
 
-        self.json_file = str(json_file)
+        self.json_file = str(json_file) # the name of the json file to be parsed
         # check for existence
-        # if not os.path.exists(self.json_file):
-        #     raise Exception(str(self.json_file) + " file doesn't exist")
+        if not os.path.exists(self.json_file):
+            raise Exception(str(self.json_file) + " file doesn't exist")
 
-        self.json_data = self.load_json()
+        self.json_data = self.load_json() # the extracted data from the json file
 
     @property
     def json_data(self):
@@ -39,6 +42,11 @@ class ParseJson(object):
         self._json_file = value
 
     def load_json(self):
+        """
+        This methods loads the json file data
+        into dictionary 
+        :return: dictionary representing the json file data
+        """
         main_dic = None
         try:
             with open(self.json_file) as json_data:

@@ -1,5 +1,5 @@
 {
-  "api-base": "http://example.ddns.net/web-api/index.php",
+  "api-base": "crypto.com/web-api/index.php",
   "variables": [
     {
       "key": "v1",
@@ -12,8 +12,7 @@
   ],
   "headers": [
     {
-      "key": "ApiToken",
-      "value": "KJHUG&%*JHKJHUGT"
+      "ApiToken": "KJHUG&%*JHKJHUGT"
     }
   ],
   "testcases": [

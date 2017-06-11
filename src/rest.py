@@ -5,20 +5,27 @@ import http.client
 
 class RestCall(object):
     """
-        Class makes HTTP Request
-
+    Class that makes HTTP Requests.
+    This class is wrapper of http.client library.
+    It has 6 members:
+       1. host - string, the host ex: www.house-net.com
+       2. controller - string, the controller ex: /test
+       3. method - string, the method ex: "GET" 
+       4. headers - associative array, the headers {"key": "value", "key2": "value2"}
+       5. data - associative array, mixed
+       6. response - response object
     """
 
-    def __init__(self, url, controller, method, headers, data):
+    def __init__(self, host, controller, method, headers, data):
         """
         Constructor
-        :param url: url
+        :param host: the host - www.house-net.com
         :param controller: the name of the controller
         :param method:  method type
         :param headers: headers to be sent
         :param data: data to be sent
         """
-        self.url = url
+        self.host = host
         self.controller = controller
         self.method = method
         self.headers = headers
@@ -29,11 +36,11 @@ class RestCall(object):
         self.response = None
 
     @property
-    def url(self):
+    def host(self):
         return self._url
 
-    @url.setter
-    def url(self, value):
+    @host.setter
+    def host(self, value):
         self._url = value
 
     @property
@@ -70,10 +77,8 @@ class RestCall(object):
 
     def send(self):
         """
-        Makes post request
-        :param data: data to be sent 
-        :param headers: headers to be sent
-        :return: response
+        Makes request.
+        :return: the response
         """
         try:
             # need to create a TCP connection that you will use to communicate with the remote server

@@ -1,11 +1,19 @@
 #!/usr/bin/python3
-from src.parsejson import ParseJson
+from src.parse_json import ParseJson
 from config import *
 
 
 class ParseTestCaseJson(ParseJson):
     """
-    Class that parses Test Case json
+    Class that parses Test Case json file.
+    It inherits from PareJson since it parses a json file,
+    but specific json file.
+    
+    It has 4 members:
+        1. method - string, the method extracted from the test-case json file
+        2. data - associative array, the data extracted from the test-case json file
+        3. controller - string, the controller extracted from the test-case json file
+        5. schema - associative array, the schema extracted from the test-case json file
     """
     def __init__(self, test_project_name , test_case_name):
         """
