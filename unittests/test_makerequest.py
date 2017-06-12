@@ -11,6 +11,20 @@ class MakeRequestTestCase(unittest.TestCase):
         self.load_json = LoadJson("test_project")
         self.make_request = MakeRequests(self.load_json)
 
+        self.test_schema = {
+                "code": "204",
+                "type": "",
+                "print": {
+                    "type": "object",
+                    "properties": {
+                        "method": {"type": "string"},
+                        "message": {"type": "string"}
+                    },
+                    "required": ["method"]
+                }
+            }
+
+
         for request in self.make_request.requests:
             request.send()
 
@@ -28,3 +42,7 @@ class MakeRequestTestCase(unittest.TestCase):
 
         for request in self.make_request.requests:
             request.send()
+
+    def test_make_requests_schema_list(self):
+        list = self.make_request.schemas
+        self.assertDictEqual(self.test_schema,list[0])

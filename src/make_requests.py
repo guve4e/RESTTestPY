@@ -8,7 +8,9 @@ class MakeRequests(object):
     It has two members:
         1.  load_json - LoadJson Object that is initialized
             outside of the class (DI purposes)
-        2.  requests - list of RestRequest objects
+        2.  schema - json schema
+        3.  requests - list of RestRequest objects
+        4.  responses - list of json responses from the wep-api
     """
 
     def __init__(self, load_json) -> None:
@@ -20,6 +22,7 @@ class MakeRequests(object):
         super().__init__()
         self.load_json = load_json
         self.requests = self.make_requests()
+        self.schemas = self.get_schemas_list()
 
     @classmethod
     def get_headers(self, headers_list) -> {}:
@@ -39,6 +42,24 @@ class MakeRequests(object):
 
         return headers_dict
 
+    def get_schemas_list(self):
+        """
+        This method iterates trough the list of requests
+        member self.requests and extracts a list of schemas.
+        
+        
+        :return: 
+        """
+        schemas_list = []
+
+        # get the test cases from load_json object
+        test_cases = self.load_json.json_test_cases
+
+        for test_case in test_cases:
+            schemas_list.append(test_case.schema)
+
+        return schemas_list
+
     def get_url_base_and_headers(self):
         """
         Extract url and headers.
@@ -55,9 +76,9 @@ class MakeRequests(object):
     @classmethod
     def make_service_string(self, list) -> [str]:
         """
-             Makes list of folders concatenated with "/"
-             :param list: list of values
-             :return list with / separation
+         Makes list of folders concatenated with "/"
+         :param list: list of values
+         :return list with / separation
          """
         # return the same values with "/" separation
         return '/'.join(list)

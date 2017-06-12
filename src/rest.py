@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import http.client
-
+from src.rest_response import RestResponse
 
 class RestCall(object):
     """
@@ -86,12 +86,10 @@ class RestCall(object):
             # then send HTTP request over HTTPS connection
             # choose method, parameters (controllers) data and headers
             conn.request(self._method, self._controller, self.data, self.headers)
-            # get response
-            self.response = conn.getresponse()
-            # debug
-            # print response
-            print(self.response.status, self.response.reason)
-            print(self.response.read().decode())
+
+            # get response and store it in RestResponse Object
+            self.response = RestResponse(conn.getresponse())
+
 
         except Exception as e:
             print("EXCEPTION")
