@@ -12,3 +12,28 @@ class RestResponse(object):
         self.status_code = response_object.status
         self.reason = response_object.reason
         self.json = response_object.read().decode()
+
+    @property
+    def status_code(self):
+        return self._status_code
+
+    @status_code.setter
+    def status_code(self, value):
+        self._status_code = value
+
+    @property
+    def reason(self):
+        return self._reason
+
+    @reason.setter
+    def reason(self, value):
+        self._reason = value
+
+    @property
+    def json(self):
+        return self._json
+
+    @json.setter
+    def json(self, value):
+        self._json = value
+
