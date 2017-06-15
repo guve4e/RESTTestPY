@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import unittest
+
 from src.rest import RestCall
 
 
@@ -29,5 +30,5 @@ class RestCallTestCase(unittest.TestCase):
         self.res.send()
 
     def test_send_local(self):
-        res = RestCall('crypto.com', '/web-api/index.php/test', 'DELETE', self.headers, self.data)
+        res = RestCall('house-net.ddns.net', '/web-api/index.php/test', 'DELETE', self.headers, self.data)
         res.send()

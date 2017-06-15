@@ -84,12 +84,12 @@ class RestCall(object):
             # need to create a TCP connection that you will use to communicate with the remote server
             conn = http.client.HTTPConnection(self._url)
             # then send HTTP request over HTTPS connection
+
             # choose method, parameters (controllers) data and headers
             conn.request(self._method, self._controller, self.data, self.headers)
 
             # get response and store it in RestResponse Object
             self.response = RestResponse(conn.getresponse())
-
 
         except Exception as e:
             print("EXCEPTION")
@@ -97,3 +97,4 @@ class RestCall(object):
             print(type(e))
 
         return self.response
+

@@ -86,7 +86,7 @@ class MakeRequests(object):
     @classmethod
     def extract_host_and_controller(self, url_base) -> [str, str]:
         """ 
-            This method gets url_base and controller,
+        This method gets url_base and controller,
         and extracts the host and the services, 
         corresponding to http.client library architecture
         Example:
