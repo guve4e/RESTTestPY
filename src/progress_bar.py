@@ -2,22 +2,31 @@
 from time import sleep
 
 
-
-class ProgressBar(object):
+class ProgressBar():
     """
     Class to represent Progress Bar
     """
+
     def __init__(self, prefix='', suffix='', decimals=1, length=100, fill='█') -> None:
+        """
+        Constructor
+        :param prefix: 
+        :param suffix: 
+        :param decimals: 
+        :param length: 
+        :param fill: 
+        """
         super().__init__()
 
         self.iteration = 0
-        self.total = 0
+        self.total = 57
+        self.sleep_time = 0.1
         self.prefix = prefix
         self.suffix = suffix
         self.decimals = decimals
         self.length = length
         self.fill = fill
-        self.status = "FAIL"
+
 
     def print_bar(self):
         """
@@ -39,14 +48,14 @@ class ProgressBar(object):
         Loop around to simpulate progress bar
         :return: void
         """
-        items = list(range(0, 57))
         self.iteration = 0
-        self.total = len(items)
+        self.total = 57
 
-        for item in items:
+        for item in range(self.total):
             sleep(0.01)
             self.iteration += 1
             self.print_bar()
 
         self.iteration = 0
         self.total = 0
+

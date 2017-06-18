@@ -12,21 +12,30 @@ class MakeRequestTestCase(unittest.TestCase):
         self.make_request = MakeRequests(self.load_json)
 
         self.test_schema = {
-                "code": "204",
-                "type": "",
-                "print": {
-                    "type": "object",
-                    "properties": {
-                        "method": {"type": "string"},
-                        "message": {"type": "string"}
-                    },
-                    "required": ["method"]
-                }
+              "type": "object",
+              "properties": {
+                  "controller": {
+                      "type": "string",
+                      "id": "some_id"
+                  },
+                  "method": {
+                      "type": "string",
+                      "id": "some_id2"
+                  },
+                  "id": {
+                      "type": "number",
+                      "optional": 123
+                  }
+              }
             }
-
 
         for request in self.make_request.requests:
             request.send()
+
+    def runTest(self):
+        self.test_get_url_and_headers()
+        self.test_make_requests()
+        self.test_make_requests_schema_list()
 
     def test_get_url_and_headers(self):
         url, headers = self.make_request.get_url_base_and_headers()

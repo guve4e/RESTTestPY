@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#!/usr/bin/python3
 import json
 import http.client
 from src.rest_response import RestResponse
@@ -7,16 +8,16 @@ class RestCall(object):
     """
     Class that makes HTTP Requests.
     This class is wrapper of http.client library.
-    It has 6 members:
-       1. host - string, the host ex: www.house-net.com
-       2. controller - string, the controller ex: /test
-       3. method - string, the method ex: "GET" 
-       4. headers - associative array, the headers {"key": "value", "key2": "value2"}
-       5. data - associative array, mixed
-       6. response - response object
+    It has 6 members: 1. host - string, the host ex: www.house-net.com
+    2. controller - string, the controller ex: /test
+    3. method - string, the method ex: "GET"
+    4. headers - associative array, the headers {"key": "value", "key2": "value2"}
+    5. schema - dictionary loaded from json, representing json schema
+    6. data - associative array, mixed
+    7. response - response object
     """
 
-    def __init__(self, host, controller, method, headers, data):
+    def __init__(self, host, controller, method, headers, data, schema=""):
         """
         Constructor
         :param host: the host - www.house-net.com
@@ -24,11 +25,17 @@ class RestCall(object):
         :param method:  method type
         :param headers: headers to be sent
         :param data: data to be sent
+        :param schema: optional, schema that response is compared to
         """
+
+        # used to send request
         self.host = host
         self.controller = controller
         self.method = method
         self.headers = headers
+
+        # used for validation
+        self.schema = schema
 
         # make json
         json_data = json.dumps(data)
@@ -97,4 +104,3 @@ class RestCall(object):
             print(type(e))
 
         return self.response
-

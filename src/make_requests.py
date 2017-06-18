@@ -148,9 +148,10 @@ class MakeRequests(object):
 
             controller = self.get_service(service) + "/" + test_case.controller # get the controller
             data = test_case.data # get the data
+            schema = test_case.schema
 
             # make the request
-            rest_request = RestCall(host, controller, method, headers, data)
+            rest_request = RestCall(host, controller, method, headers, data, schema)
             requests.append(rest_request) # append the list of requests
 
         return requests

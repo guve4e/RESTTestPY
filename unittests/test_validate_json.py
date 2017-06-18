@@ -9,24 +9,35 @@ class ValidateJsonTestCase(unittest.TestCase):
         self.schema = {
             "type": "object",
             "properties": {
-                "price": {
+                "controller": {
+                    "type": "string",
+                    "id": "some_id"
+                },
+                "method": {
+                    "type": "string",
+                    "id": "some_id2"
+                },
+                "id": {
                     "type": "number",
-                    "id": "some_id",
                     "optional": True
                 },
-                "name": {"type": "string"},
             }
         }
 
-        self.json_object_pass = {
-            "name": "Eggs",
-            "price" : 12.34
-        }
+        self.json_object_pass = r"""{
+            "controller": "Test",
+            "method": "GET",
+            "id": 123
+        }"""
 
-        self.json_object_fail = {
-            "name": "Eggs",
-            "price": "Invalid"
-        }
+        self.json_object_fail = r"""{
+            "controller": "Test",
+            "method": "GET",
+            "id": "123"
+        }"""
+
+    def runTest(self):
+        pass
 
     def test_validate_json_good(self):
         # Act

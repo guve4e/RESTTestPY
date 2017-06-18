@@ -1,18 +1,34 @@
 from jsonschema import validate
+import json
 
 
 class ValidateJson(object):
     """
+    Wrapper around jsonchema.validate.
+    It uses member method validate(json, schema)
+    if json not valid for the schema provided, 
+    then it throws an exception. 
     
+    As of now it uses the message member of the 
+    exception object to show id validation is not 
+    successful.
+    
+    This class has 3 members:
+        1. schema: dictionary - the schema
+        2. json: json object - the json
+        3. message: string - message representing why
+        the validation was not successful
+        4. is_valid: boolean - the state of the validation
+        /successful or not
     """
 
-    def __init__(self, schema, json) -> None:
+    def __init__(self, schema, json_string) -> None:
 
         super().__init__()
 
         self.schema = schema
-        self.json = json
-
+        self.json = json.loads(json_string)
+        #self.json = json_string
         self.message = None
 
         # validate
@@ -20,7 +36,13 @@ class ValidateJson(object):
 
     def validate_json(self):
         """
-        Wrapper around json-schema validate    
+        Wrapper around json-schema validate.
+        If the validation was not successful,
+        an exception is thrown. 
+        This method captures the exception 
+        and updates the message member variable
+        with the exception message.
+        
         :return: void
         """
 

@@ -2,15 +2,22 @@
   "method": "GET",
   "controller": "Test",
   "schema": {
-    "code": "204",
-    "type": "",
-    "print": {
       "type": "object",
       "properties": {
-        "method": { "type": "string" },
-        "message": { "type": "string" }
-       },
-       "required": ["method"]
-    }
+          "controller": {
+              "type": "string",
+              "id": "some_id"
+          },
+          "method": {
+              "type": "string",
+              "id": "some_id2"
+          },
+          "id": {
+              "type": "number",
+              "optional": 123
+          }
+      }
   }
 }
+
+

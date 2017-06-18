@@ -26,9 +26,16 @@ class RestCallTestCase(unittest.TestCase):
 
         self.res = RestCall('android.googleapis.com', '/gcm/send', 'POST', self.headers, self.data)
 
+    def runTest(self):
+        self.test_send()
+        self.test_send_local()
+
     def test_send(self):
         self.res.send()
 
     def test_send_local(self):
         res = RestCall('house-net.ddns.net', '/web-api/index.php/test', 'DELETE', self.headers, self.data)
         res.send()
+
+if __name__ == '__main__':
+    unittest.main()

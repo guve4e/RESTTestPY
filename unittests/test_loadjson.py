@@ -56,21 +56,31 @@ class LoadJsonTestCase(unittest.TestCase):
         self.method = "GET"
         self.controller = "Test"
         self.schema = {
-            "code": "204",
-            "type": "",
-            "print": {
-                "type": "object",
-                "properties": {
-                    "method": {"type": "string"},
-                    "message": {"type": "string"}
-                },
-                "required": ["method"]
-            }
-        }
+              "type": "object",
+              "properties": {
+                  "controller": {
+                      "type": "string",
+                      "id": "some_id"
+                  },
+                  "method": {
+                      "type": "string",
+                      "id": "some_id2"
+                  },
+                  "id": {
+                      "type": "number",
+                      "optional": 123
+                  }
+              }
+          }
 
         self.json_file_main = "test.json"
         self.test_cases_names_list = ["TestGET", "TestPOST", "TestPUT", "TestDELETE"]
         self.json_file_test_cases = []
+
+    def runTest(self):
+        self.test_main_json_creation()
+        self.test_test_case_json_creation()
+        self.test_json_creation()
 
     def test_main_json_creation(self):
         """
