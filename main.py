@@ -9,7 +9,7 @@ if __name__ == "__main__":
         project_name = sys.argv[1]
 
         try:
-            process = ProcessRequests(project_name)
+            process = ProcessRequests("test_project")
         except Exception as e:
             print(str(e))
 

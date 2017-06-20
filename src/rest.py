@@ -3,6 +3,7 @@
 import json
 import http.client
 from src.rest_response import RestResponse
+import time
 
 class RestCall(object):
     """
@@ -41,6 +42,7 @@ class RestCall(object):
         json_data = json.dumps(data)
         self.data = json_data
         self.response = None
+        self.time_response = None
 
     @property
     def host(self):
@@ -82,6 +84,15 @@ class RestCall(object):
     def response(self, value):
         self._response = value
 
+    @property
+    def time_response(self):
+        return self._time_response
+
+    @time_response.setter
+    def time_response(self, value):
+        self._time_response = value
+
+
     def send(self):
         """
         Makes request.
@@ -92,11 +103,18 @@ class RestCall(object):
             conn = http.client.HTTPConnection(self._url)
             # then send HTTP request over HTTPS connection
 
-            # choose method, parameters (controllers) data and headers
+            # take time
+            start_time = time.time()
+
+            # choose method, parameters (controllers) data and headers and send request
             conn.request(self._method, self._controller, self.data, self.headers)
 
+             # take time
+            end_time = time.time()
+            self.time_response = round((end_time - start_time), 4)
+
             # get response and store it in RestResponse Object
-            self.response = RestResponse(conn.getresponse())
+            self.response = RestResponse(conn.getresponse(), self.time_response)
 
         except Exception as e:
             print("EXCEPTION")

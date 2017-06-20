@@ -27,12 +27,35 @@ class ValidateJson(object):
         super().__init__()
 
         self.schema = schema
-        self.json = json.loads(json_string)
-        #self.json = json_string
+        self.json = self.load_json(json_string)
         self.message = None
 
         # validate
         self.validate_json()
+
+    def load_json(self, json_string):
+        """
+        Trying to convert string to json. 
+        If the string is convertable to json
+        :param json_string: 
+        :return: 
+        """
+        if not isinstance(json_string, str):
+            json_str = json.loads(json_string.decode("utf-8"))
+
+        try:
+            json_str = json.loads(json_string)
+        except Exception as e:
+            #  form an exception object
+            import pprint
+            json_string = pprint.pformat(json_string)
+            data = {
+                "Message": "Unable to convert to json: " + str(e),
+                "Response": json_string
+            }
+            json_str = json.dumps(data, ensure_ascii=False)
+
+        return json_str
 
     def validate_json(self):
         """

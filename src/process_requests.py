@@ -6,7 +6,7 @@ from src.progress_bar import ProgressBar
 from src.validate_json import ValidateJson
 from time import sleep
 from concurrent.futures import ThreadPoolExecutor
-
+import json
 
 def send_requests_helper(request):
     """
@@ -101,3 +101,9 @@ class ProcessRequests(object):
             else:
                 print("Status: " + Color.FAIL + "FAIL" + Color.ENDC)
                 print("Message: " + str(validate.message))
+
+            parsed = json.loads(response._result.json)
+            print("Response: " + json.dumps(parsed, indent=4, sort_keys=True))
+            print("Time: " + str(response._result.time_response))
+
+            print()

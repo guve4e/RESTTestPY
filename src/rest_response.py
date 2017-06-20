@@ -6,12 +6,13 @@ class RestResponse(object):
     
     """
 
-    def __init__(self, response_object) -> None:
+    def __init__(self, response_object, time) -> None:
         super().__init__()
 
         self.status_code = response_object.status
         self.reason = response_object.reason
         self.json = response_object.read().decode()
+        self.time_response = time
 
     @property
     def status_code(self):
