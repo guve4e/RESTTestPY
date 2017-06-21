@@ -11,7 +11,6 @@ class MakeRequests(object):
         2.  schema - json schema
         3.  requests - list of RestRequest objects
     """
-
     def __init__(self, load_json) -> None:
         """
         Constructor
@@ -19,12 +18,36 @@ class MakeRequests(object):
         :param load_json: is LoadJson Object
         """
         super().__init__()
-        self.load_json = load_json
-        self.requests = self.make_requests()
-        self.schemas = self.get_schemas_list()
+        self.__load_json = load_json
+        self.__requests = self.__make_requests()
+        self.__schemas = self.get_schemas_list()
+
+    @property
+    def load_json(self):
+        return self.__load_json
+
+    @load_json.setter
+    def load_json(self, value):
+        self.__load_json = value
+
+    @property
+    def requests(self):
+        return self.__requests
+
+    @requests.setter
+    def requests(self, value):
+        self.__requests = value
+
+    @property
+    def schemas(self):
+        return self.__schemas
+
+    @schemas.setter
+    def schemas(self, value):
+        self.__schemas = value
 
     @classmethod
-    def get_headers(self, headers_list) -> {}:
+    def get_headers(cls, headers_list) -> {}:
         """
         Transforms list of dictionaries to dictionary.
         Given a list of headers, it extracts the headers
@@ -52,7 +75,7 @@ class MakeRequests(object):
         schemas_list = []
 
         # get the test cases from load_json object
-        test_cases = self.load_json.json_test_cases
+        test_cases = self.__load_json.json_test_cases
 
         for test_case in test_cases:
             schemas_list.append(test_case.schema)
@@ -68,8 +91,8 @@ class MakeRequests(object):
         
         :return the extracted url and headers dictionary: 
         """
-        url = self.load_json.json_main.api_base
-        headers = self.get_headers(self.load_json.json_main.headers_list)
+        url = self.__load_json.json_main.api_base
+        headers = self.get_headers(self.__load_json.json_main.headers_list)
         return url, headers
 
     @classmethod
@@ -121,7 +144,7 @@ class MakeRequests(object):
 
         return service
 
-    def make_requests(self) -> [RestCall]:
+    def __make_requests(self) -> [RestCall]:
         """
         Forms a request and stores it in
         a list.
@@ -142,7 +165,7 @@ class MakeRequests(object):
         host, service = self.extract_host_and_controller(url_base)
 
         # loop trough each test case and gather info
-        for test_case in self.load_json.json_test_cases:
+        for test_case in self.__load_json.json_test_cases:
             method = test_case.method # get the method
 
             controller = self.get_service(service) + "/" + test_case.controller # get the controller

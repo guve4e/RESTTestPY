@@ -2,7 +2,7 @@
 from time import sleep
 
 
-class ProgressBar():
+class ProgressBar(object):
     """
     Class to represent Progress Bar
     """
@@ -17,44 +17,43 @@ class ProgressBar():
         """
         super().__init__()
 
-        self.iteration = 0
-        self.total = 57
-        self.sleep_time = 0.1
-        self.prefix = prefix
-        self.suffix = suffix
-        self.decimals = decimals
-        self.length = length
-        self.fill = fill
+        self.__iteration = 0
+        self.__total = 57
+        self.__sleep_time = 0.1
+        self.__prefix = prefix
+        self.__suffix = suffix
+        self.__decimals = decimals
+        self.__length = length
+        self.__fill = fill
 
-
-    def print_bar(self):
+    def __print_bar(self):
         """
         Prints progress bar
         :return:
         """
         # get percentage
-        percent = ("{0:." + str(self.decimals) + "f}").format(100 * (self.iteration / float(self.total)))
+        percent = ("{0:." + str(self.__decimals) + "f}").format(100 * (self.__iteration / float(self.__total)))
         # get the length
-        filled_length = int(self.length * self.iteration // self.total)
-        bar = self.fill * filled_length + '-' * (self.length - filled_length)
-        print('\r%s |%s| %s%% %s' % (self.prefix, bar, percent, self.suffix), end='\r')
+        filled_length = int(self.__length * self.__iteration // self.__total)
+        bar = self.__fill * filled_length + '-' * (self.__length - filled_length)
+        print('\r%s |%s| %s%% %s' % (self.__prefix, bar, percent, self.__suffix), end='\r')
         # Print New Line on Complete
-        if self.iteration == self.total:
+        if self.__iteration == self.__total:
             print()
 
     def show(self):
         """
-        Loop around to simpulate progress bar
+        Loop around to simulate progress bar
         :return: void
         """
-        self.iteration = 0
-        self.total = 57
+        self.__iteration = 0
+        self.__total = 57
 
-        for item in range(self.total):
+        for item in range(self.__total):
             sleep(0.01)
-            self.iteration += 1
-            self.print_bar()
+            self.__iteration += 1
+            self.__print_bar()
 
-        self.iteration = 0
-        self.total = 0
+        self.__iteration = 0
+        self.__total = 0
 

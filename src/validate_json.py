@@ -27,12 +27,45 @@ class ValidateJson(object):
 
         super().__init__()
 
-        self.schema = schema
-        self.json = Utility.load_json(json_string)
-        self.message = None
+        self.__schema = schema
+        self.__json = Utility.load_json(json_string)
+        self.__message = None
+        self.__is_valid = True
 
         # validate
         self.validate_json()
+
+    @property
+    def schema(self):
+        return self.__schema
+
+    @schema.setter
+    def schema(self, value):
+        self.__schema = value
+
+    @property
+    def json(self):
+        return self.__json
+
+    @json.setter
+    def json(self, value):
+        self.__json = value
+
+    @property
+    def message(self):
+        return self.__message
+
+    @message.setter
+    def message(self, value):
+        self.__message = value
+
+    @property
+    def is_valid(self):
+        return self.__is_valid
+
+    @is_valid.setter
+    def is_valid(self, value):
+        self.__is_valid = value
 
     def validate_json(self):
         """
@@ -45,14 +78,13 @@ class ValidateJson(object):
         
         :return: void
         """
-
         try:
             # make sure json is first argument
             # and schema is second
-            validate(self.json, self.schema)
-            self.is_valid = True
+            validate(self.__json, self.__schema)
+            self.__is_valid = True
         except Exception as e:
-            self.message = str(e)
-            self.is_valid = False
+            self.__message = str(e)
+            self.__is_valid = False
 
 

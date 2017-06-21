@@ -20,25 +20,33 @@ class LoadJson(object):
         dependency injection for unit testing
         """
         if not project_name is None:
-            self.json_main = ParseMainJson(project_name)
-            self.test_cases_names_list = self.extract_test_cases_names(self.json_main.test_cases_list)
-            self.json_test_cases = self.get_test_cases(self.test_cases_names_list, project_name)
+            self.__json_main = ParseMainJson(project_name)
+            self.__test_cases_names_list = self.extract_test_cases_names(self.__json_main.test_cases_list)
+            self.__json_test_cases = self.get_test_cases(self.__test_cases_names_list, project_name)
 
     @property
     def json_main(self):
-        return self._json_file_main
+        return self.__json_main
 
     @json_main.setter
     def json_main(self, value):
-        self._json_file_main = value
+        self.__json_main = value
+
+    @property
+    def test_cases_names_list(self):
+        return self.__test_cases_names_list
+
+    @test_cases_names_list.setter
+    def test_cases_names_list(self, value):
+        self.__test_cases_names_list = value
 
     @property
     def json_test_cases(self):
-        return self._json_file_test_cases
+        return self.__json_test_cases
 
     @json_test_cases.setter
     def json_test_cases(self, value):
-        self._json_file_test_cases = value
+        self.__json_test_cases = value
 
     @classmethod
     def extract_test_cases_names(cls, test_cases_names) -> [str]:

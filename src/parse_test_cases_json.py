@@ -23,26 +23,42 @@ class ParseTestCaseJson(ParseJson):
 
         ParseJson.__init__(self, self.construct_path(test_project_name, test_case_name))
 
-        self.method = self.json_data['method']
-        self.data = self.get_data()
-        self.controller = self.json_data['controller']
-        self.schema = self.json_data['schema']
+        self.__method = self.json_data['method']
+        self.__data = self.get_data()
+        self.__controller = self.json_data['controller']
+        self.__schema = self.json_data['schema']
 
     @property
     def method(self):
-        return self._method
+        return self.__method
 
     @method.setter
     def method(self, value):
-        self._method = value
+        self.__method = value
+
+    @property
+    def data(self):
+        return self.__data
+
+    @data.setter
+    def data(self, value):
+        self.__data = value
 
     @property
     def controller(self):
-        return self._controller
+        return self.__controller
 
     @controller.setter
     def controller(self, value):
-        self._controller = value
+        self.__controller = value
+
+    @property
+    def schema(self):
+        return self.__schema
+
+    @schema.setter
+    def schema(self, value):
+        self.__schema = value
 
     def get_data(self):
         data = None
@@ -51,7 +67,8 @@ class ParseTestCaseJson(ParseJson):
 
         return data
 
-    def construct_path(self, test_case_name, test_project_name) -> str:
+    @classmethod
+    def construct_path(cls, test_case_name, test_project_name) -> str:
         test_project_name = str(test_project_name) + ".json"
         json_file_name = TEST_CASES_DIR / test_case_name / test_project_name
         return json_file_name

@@ -22,16 +22,14 @@ if __name__ == "__main__":
 
     print("+++++++++ START ++++++++++")
 
-    process = ProcessRequests("test_project", False)
+    if len(sys.argv) > 1:
+        project, verbose = get_commandline_args(sys.argv)
 
-    # if len(sys.argv) > 1:
-    #     project, verbose = get_commandline_args(sys.argv)
-    #
-    #     try:
-    #         process = ProcessRequests("test_project", verbose)
-    #     except Exception as e:
-    #         print(str(e))
-    #
-    # else:
-    #     print("Specify A Project Name")
-    #     exit()
+        try:
+            process = ProcessRequests(project, verbose)
+        except Exception as e:
+            print(str(e))
+
+    else:
+        print("Specify A Project Name")
+        exit()

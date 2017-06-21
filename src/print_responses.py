@@ -23,14 +23,13 @@ class PrintResponses(object):
         3. json: Json Object returned from the web-api
         4. time: Time object representing how much time was he request
     """
-
     def __init__(self, validation, verbose, json_string, time) -> None:
         super().__init__()
 
-        self.validation = validation
-        self.verbose = verbose
-        self.json = Utility.load_json(json_string)
-        self.time = time
+        self.__validation = validation
+        self.__verbose = verbose
+        self.__json = Utility.load_json(json_string)
+        self.__time = time
 
         self.print()
 
@@ -39,15 +38,15 @@ class PrintResponses(object):
         Print On Screen
         :return: void
         """
-        if self.validation.is_valid is True:
+        if self.__validation.is_valid is True:
             print("Status: " + Color.OKGREEN + "PASS" + Color.ENDC)
         else:
             print("Status: " + Color.FAIL + "FAIL" + Color.ENDC)
-            if self.verbose:
-                print("Message: " + str(self.validation.message))
+            if self.__verbose:
+                print("Message: " + str(self.__validation.message))
 
-        if self.verbose:
-            print("Response: " + self.json)
-            print("Time: " + str(self.time))
+        if self.__verbose:
+            print("Response: " + self.__json)
+            print("Time: " + str(self.__time))
 
         print()

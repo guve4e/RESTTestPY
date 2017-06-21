@@ -14,32 +14,39 @@ class RestResponse(object):
     def __init__(self, response_object, time) -> None:
         super().__init__()
 
-        self.status_code = response_object.status
-        self.reason = response_object.reason
-        self.json = response_object.read().decode()
-        self.time_response = time
+        self.__status_code = response_object.status
+        self.__reason = response_object.reason
+        self.__json = response_object.read().decode()
+        self.__time_response = time
 
     @property
     def status_code(self):
-        return self._status_code
+        return self.__status_code
 
     @status_code.setter
     def status_code(self, value):
-        self._status_code = value
+        self.__status_code = value
 
     @property
     def reason(self):
-        return self._reason
+        return self.__reason
 
     @reason.setter
     def reason(self, value):
-        self._reason = value
+        self.__reason = value
 
     @property
     def json(self):
-        return self._json
+        return self.__json
 
     @json.setter
     def json(self, value):
-        self._json = value
+        self.__json = value
 
+    @property
+    def time_response(self):
+        return self.__time_response
+
+    @time_response.setter
+    def time_response(self, value):
+        self.__time_response = value

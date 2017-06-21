@@ -37,14 +37,14 @@ class ProcessRequests(object):
     def __init__(self, project_name, verbose) -> None:
         super().__init__()
 
-        self.project_name = project_name
-        self.verbose = verbose
-        self.json_config = LoadJson(project_name)
-        self.make_request = MakeRequests(self.json_config)
+        self.__project_name = project_name
+        self.__verbose = verbose
+        self.__json_config = LoadJson(project_name)
+        self.__make_request = MakeRequests(self.__json_config)
 
         # send requests and collect responses
-        self.responses = self.send_requests(self.make_request.requests)
-        self.validate_requests(self.make_request.requests, self.responses)
+        self.responses = self.send_requests(self.__make_request.requests)
+        self.validate_requests(self.__make_request.requests, self.responses)
 
     @classmethod
     def send_requests(cls, requests):
@@ -98,7 +98,7 @@ class ProcessRequests(object):
             # simulate progress bar
             progress_bar.show()
 
-            print_requests = PrintResponses(validation, self.verbose, response._result.json,
+            print_requests = PrintResponses(validation, self.__verbose, response._result.json,
                                             response._result.time_response)
 
         # sum the time for the individual requests and round to 2 decimal places

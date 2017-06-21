@@ -27,39 +27,39 @@ class ParseMainJson(ParseJson):
         # send to ParseJson
         ParseJson.__init__(self, self.json_file)
 
-        self.api_base = self.json_data['api-base']
-        self.variables_list = self.json_data['variables']
-        self.headers_list = self.json_data['headers']
-        self.test_cases_list = self.json_data['testcases']
+        self.__api_base = self.json_data['api-base']
+        self.__variables_list = self.json_data['variables']
+        self.__headers_list = self.json_data['headers']
+        self.__test_cases_list = self.json_data['testcases']
 
     @property
     def api_base(self):
-        return self._api_base
+        return self.__api_base
 
     @api_base.setter
     def api_base(self, value):
-        self._api_base = value
+        self.__api_base = value
 
     @property
     def variables_list(self):
-        return self._variables_dict
+        return self.__variables_list
 
     @variables_list.setter
     def variables_list(self, value):
-        self._variables_dict = value
+        self.__variables_list = value
 
     @property
     def headers_list(self):
-        return self._headers_dict
+        return self.__headers_list
 
     @headers_list.setter
     def headers_list(self, value):
-        self._headers_dict = value
+        self.__headers_list = value
 
     @property
     def test_cases_list(self):
-        return self._test_cases_dict
+        return self.__test_cases_list
 
     @test_cases_list.setter
     def test_cases_list(self, value):
-        self._test_cases_dict = value
+        self.__test_cases_list = value

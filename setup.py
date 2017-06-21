@@ -8,5 +8,5 @@ setup(
    author='Valentin Kormanov',
    author_email='guve4e@gmail.com',
    packages=['RESTTestPY'],
-   install_requires=['tqdm'], #external packages as dependencies
+   install_requires=['tqdm', 'jsonschema'], #external packages as dependencies
 )

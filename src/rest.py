@@ -9,7 +9,7 @@ class RestCall(object):
     """
     Class that makes HTTP Requests.
     This class is wrapper of http.client library.
-    It has 6 members:
+    It has 8 members:
         1. host - string, the host ex: www.house-net.com
         2. controller - string, the controller ex: /test
         3. method - string, the method ex: "GET"
@@ -32,64 +32,80 @@ class RestCall(object):
         """
 
         # used to send request
-        self.host = host
-        self.controller = controller
-        self.method = method
-        self.headers = headers
+        self.__host = host
+        self.__controller = controller
+        self.__method = method
+        self.__headers = headers
 
         # used for validation
-        self.schema = schema
-        self.data = self.get_json_data(data)
-        self.response = None
-        self.time_response = None
+        self.__schema = schema
+        self.__data = self.get_json_data(data)
+        self.__response = None
+        self.__time_response = None
 
     @property
     def host(self):
-        return self._url
+        return self.__host
 
     @host.setter
     def host(self, value):
-        self._url = value
+        self.__host = value
 
     @property
     def controller(self):
-        return self._controller
+        return self.__controller
 
     @controller.setter
     def controller(self, value):
-        self._controller = value
+        self.__controller = value
 
     @property
     def method(self):
-        return self._method
+        return self.__method
 
     @method.setter
     def method(self, value):
-        self._method = value
+        self.__method = value
 
     @property
     def headers(self):
-        return self._headers
+        return self.__headers
 
     @headers.setter
     def headers(self, value):
-        self._headers = value
+        self.__headers = value
+
+    @property
+    def schema(self):
+        return self.__schema
+
+    @schema.setter
+    def schema(self, value):
+        self.__schema = value
+
+    @property
+    def data(self):
+        return self.__data
+
+    @data.setter
+    def data(self, value):
+        self.__data = value
 
     @property
     def response(self):
-        return self._response
+        return self.__response
 
     @response.setter
     def response(self, value):
-        self._response = value
+        self.__response = value
 
     @property
     def time_response(self):
-        return self._time_response
+        return self.__time_response
 
     @time_response.setter
     def time_response(self, value):
-        self._time_response = value
+        self.__time_response = value
 
     @classmethod
     def get_json_data(cls, data):
@@ -104,26 +120,26 @@ class RestCall(object):
         """
         try:
             # need to create a TCP connection that you will use to communicate with the remote server
-            conn = http.client.HTTPConnection(self._url)
+            conn = http.client.HTTPConnection(self.__host)
             # then send HTTP request over HTTPS connection
 
             # take time
             start_time = time.time()
 
             # choose method, parameters (controllers) data and headers and send request
-            conn.request(self._method, self._controller, self.data, self.headers)
+            conn.request(self.__method, self.__controller, self.__data, self.__headers)
 
             # take time
             end_time = time.time()
-            self.time_response = round((end_time - start_time), 4)
+            self.__time_response = round((end_time - start_time), 4)
 
             # get response and store it in RestResponse Object
-            self.response = RestResponse(conn.getresponse(), self.time_response)
+            self.__response = RestResponse(conn.getresponse(), self.__time_response)
 
         except Exception as e:
             # Work here, collect the message instead of printing it.
             print("EXCEPTION")
-            print ("Message " + str(e))
+            print("Message " + str(e))
             print(type(e))
 
-        return self.response
+        return self.__response
