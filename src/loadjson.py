@@ -9,7 +9,8 @@ class LoadJson(object):
     This class loads json file.
     It has two members:
         1.  json_main - object that describes test.json file
-        2.  json_test_cases - list of ParseTestCaseJson objects (test cases' objects)
+        2.  test_cases_names_list - list with Test Cases names
+        3.  json_test_cases - list of ParseTestCaseJson objects (test cases' objects)
     """
     def __init__(self, project_name=None):
         """

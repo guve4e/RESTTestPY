@@ -3,7 +3,12 @@
 
 class RestResponse(object):
     """
-    
+    Represents Rest Response.
+    It has 4 members:
+        1. status_code - representing the code status
+        2. reason - the response reason
+        3. json - the returned json from the web-api
+        4. time_response - the time it took to make the request
     """
 
     def __init__(self, response_object, time) -> None:

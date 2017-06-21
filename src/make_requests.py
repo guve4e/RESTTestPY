@@ -10,7 +10,6 @@ class MakeRequests(object):
             outside of the class (DI purposes)
         2.  schema - json schema
         3.  requests - list of RestRequest objects
-        4.  responses - list of json responses from the wep-api
     """
 
     def __init__(self, load_json) -> None:

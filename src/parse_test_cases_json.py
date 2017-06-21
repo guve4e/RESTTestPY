@@ -13,7 +13,7 @@ class ParseTestCaseJson(ParseJson):
         1. method - string, the method extracted from the test-case json file
         2. data - associative array, the data extracted from the test-case json file
         3. controller - string, the controller extracted from the test-case json file
-        5. schema - associative array, the schema extracted from the test-case json file
+        4. schema - associative array, the schema extracted from the test-case json file
     """
     def __init__(self, test_project_name , test_case_name):
         """

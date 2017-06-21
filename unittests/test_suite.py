@@ -6,7 +6,7 @@ from unittests.test_rest import RestCallTestCase
 
 def create_suite():
     test_suite = unittest.TestSuite()
-    test_suite.addTest(RestCallTestCase())
+    #test_suite.addTest(RestCallTestCase())
     test_suite.addTest(MakeRequestTestCase())
     test_suite.addTest(LoadJsonTestCase())
     return test_suite

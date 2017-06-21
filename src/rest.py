@@ -1,21 +1,23 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
 import json
 import http.client
 from src.rest_response import RestResponse
 import time
 
+
 class RestCall(object):
     """
     Class that makes HTTP Requests.
     This class is wrapper of http.client library.
-    It has 6 members: 1. host - string, the host ex: www.house-net.com
-    2. controller - string, the controller ex: /test
-    3. method - string, the method ex: "GET"
-    4. headers - associative array, the headers {"key": "value", "key2": "value2"}
-    5. schema - dictionary loaded from json, representing json schema
-    6. data - associative array, mixed
-    7. response - response object
+    It has 6 members:
+        1. host - string, the host ex: www.house-net.com
+        2. controller - string, the controller ex: /test
+        3. method - string, the method ex: "GET"
+        4. headers - associative array, the headers {"key": "value", "key2": "value2"}
+        5. schema - dictionary loaded from json, representing json schema
+        6. data - associative array, mixed
+        7. response - response object
+        8. time_response - the time it took for the request
     """
 
     def __init__(self, host, controller, method, headers, data, schema=""):
@@ -37,10 +39,7 @@ class RestCall(object):
 
         # used for validation
         self.schema = schema
-
-        # make json
-        json_data = json.dumps(data)
-        self.data = json_data
+        self.data = self.get_json_data(data)
         self.response = None
         self.time_response = None
 
@@ -92,6 +91,11 @@ class RestCall(object):
     def time_response(self, value):
         self._time_response = value
 
+    @classmethod
+    def get_json_data(cls, data):
+        # make json
+        json_data = json.dumps(data)
+        return json_data
 
     def send(self):
         """
@@ -109,7 +113,7 @@ class RestCall(object):
             # choose method, parameters (controllers) data and headers and send request
             conn.request(self._method, self._controller, self.data, self.headers)
 
-             # take time
+            # take time
             end_time = time.time()
             self.time_response = round((end_time - start_time), 4)
 
@@ -117,6 +121,7 @@ class RestCall(object):
             self.response = RestResponse(conn.getresponse(), self.time_response)
 
         except Exception as e:
+            # Work here, collect the message instead of printing it.
             print("EXCEPTION")
             print ("Message " + str(e))
             print(type(e))

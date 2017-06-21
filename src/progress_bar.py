@@ -6,7 +6,6 @@ class ProgressBar():
     """
     Class to represent Progress Bar
     """
-
     def __init__(self, prefix='', suffix='', decimals=1, length=100, fill='█') -> None:
         """
         Constructor
