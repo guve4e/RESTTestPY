@@ -20,7 +20,13 @@ def get_commandline_args(args):
 
 if __name__ == "__main__":
 
+<<<<<<< HEAD
+    print("======================== RESTTestPY =============================")
+
+    # process = ProcessRequests("crystalpure", "-v");
+=======
     print("+++++++++ START ++++++++++")
+>>>>>>> 895d62543b920d8b0ecbf61b56e73bfb54758022
 
     if len(sys.argv) > 1:
         project, verbose = get_commandline_args(sys.argv)

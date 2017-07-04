@@ -95,6 +95,9 @@ class ProcessRequests(object):
         for request, response in zip(requests, responses):
             # validation
             validation = ValidateJson(request.schema, response._result.json)
+
+            print("Testing controller : " + request.controller)
+            print("Method             : " + request.method)
             # simulate progress bar
             progress_bar.show()
 
@@ -103,6 +106,6 @@ class ProcessRequests(object):
 
         # sum the time for the individual requests and round to 2 decimal places
         total_time = reduce(lambda x, y: x+y, self.get_requests_times())
-        total_time = round(total_time, 2)
+        total_time = round(total_time, 3)
         # print to console
         print("Total Time: " + str(total_time) + " sec")
