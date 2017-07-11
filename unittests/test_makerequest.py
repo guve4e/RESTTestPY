@@ -8,7 +8,9 @@ class MakeRequestTestCase(unittest.TestCase):
     def setUp(self):
 
         # Arrange
+        # Dependency for Make Requests
         self.load_json = LoadJson("test_project")
+        # MakeRequest object
         self.make_request = MakeRequests(self.load_json)
 
         self.test_schema = {

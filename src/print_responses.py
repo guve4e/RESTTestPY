@@ -46,7 +46,7 @@ class PrintResponses(object):
                 print("Message: " + str(self.__validation.message))
 
         if self.__verbose:
-            print("Response: " + self.__json)
+            print("Response: " + str(self.__json))
             print("Time: " + str(self.__time))
 
         print()

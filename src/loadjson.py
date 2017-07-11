@@ -2,6 +2,7 @@
 from src.parse_main_json import ParseMainJson
 from src.parse_test_cases_json import ParseTestCaseJson
 from config import*
+import string
 
 
 class LoadJson(object):
@@ -10,19 +11,28 @@ class LoadJson(object):
     It has two members:
         1.  json_main - object that describes test.json file
         2.  test_cases_names_list - list with Test Cases names
-        3.  json_test_cases - list of ParseTestCaseJson objects (test cases' objects)
+        3.  json_test_cases - list filtered  of ParseTestCaseJson objects (test cases' objects)
+            If filter is passed as an argument to __innit__,
+            test_cases will contain only test cases corresponding to
+            the filter.
+            Ex: if "test" is passed as an argument to __init__,
+            then test_cases member will contain only test cases
+            that start with "test" string.
     """
-    def __init__(self, project_name=None):
+    def __init__(self, project_name=None, filter_keyword=None):
         """
         Constructor
         :param project_name: the name of the json file
         It has default value, which gives it ability for
         dependency injection for unit testing
         """
-        if not project_name is None:
+        if project_name is not None:
             self.__json_main = ParseMainJson(project_name)
-            self.__test_cases_names_list = self.extract_test_cases_names(self.__json_main.test_cases_list)
+            self.non_filtered_test_cases_names_list = self.extract_test_cases_names(self.__json_main.test_cases_list)
+            self.__test_cases_names_list = self.filter_test_cases(filter_keyword)
             self.__json_test_cases = self.get_test_cases(self.__test_cases_names_list, project_name)
+        else:
+            raise Exception("You need to specify project name")
 
     @property
     def json_main(self):
@@ -65,6 +75,28 @@ class LoadJson(object):
                 names.append(val)
 
         return names
+
+    def filter_test_cases(self, keyword) -> []:
+        """
+        Filters member __load_json.test_cases_names_list,
+        and stores the newly created list in member
+        __test_cases if parameter "keyword" is supplied,
+        If not it returns the whole __load_json.test_cases_names_list
+        :param keyword: the filter keyword
+        :return: list of filtered test cases' names
+        """
+
+        # if parameter is not supplied
+        # give back the whole list of test cases' names
+        if keyword is None:
+            return self.non_filtered_test_cases_names_list
+
+        filtered_list = list(filter(
+            lambda test_case_name:
+            keyword in test_case_name,
+            self.non_filtered_test_cases_names_list))
+
+        return filtered_list
 
     @classmethod
     def get_test_cases(cls, names_list, project_name) -> [ParseTestCaseJson]:

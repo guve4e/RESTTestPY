@@ -9,7 +9,7 @@ class MakeRequests(object):
         1.  load_json - LoadJson Object that is initialized
             outside of the class (DI purposes)
         2.  schema - json schema
-        3.  requests - list of RestRequest objects
+        4.  requests - list of RestRequest objects
     """
     def __init__(self, load_json) -> None:
         """
@@ -29,6 +29,14 @@ class MakeRequests(object):
     @load_json.setter
     def load_json(self, value):
         self.__load_json = value
+
+    @property
+    def test_cases (self):
+        return self.__test_cases
+
+    @test_cases .setter
+    def test_cases (self, value):
+        self.__test_cases  = value
 
     @property
     def requests(self):
@@ -68,8 +76,7 @@ class MakeRequests(object):
         """
         This method iterates trough the list of requests
         member self.requests and extracts a list of schemas.
-        
-        
+
         :return: 
         """
         schemas_list = []

@@ -80,7 +80,8 @@ class LoadJsonTestCase(unittest.TestCase):
     def runTest(self):
         self.test_main_json_creation()
         self.test_test_case_json_creation()
-        self.test_json_creation()
+        self.test_main_json_creation()
+        self.test_load_json_creation()
 
     def test_main_json_creation(self):
         """
@@ -106,7 +107,7 @@ class LoadJsonTestCase(unittest.TestCase):
         self.assertEqual(self.controller, self.json_test_case.controller)
         self.assertDictEqual(self.schema, self.json_test_case.schema)
 
-    def test_json_creation(self):
+    def test_load_json_creation(self):
         """
             Test the creation and initialization
             of LoadJson object which encapsulates
@@ -114,7 +115,7 @@ class LoadJsonTestCase(unittest.TestCase):
             :return: void
         """
 
-        json = LoadJson()
+        json = LoadJson('test_project')
         json.json_main = ParseMainJson('test_project')
         json.json_test_cases = [
             ParseTestCaseJson("test_project", "test/TestGET"),
@@ -125,3 +126,23 @@ class LoadJsonTestCase(unittest.TestCase):
 
         list_of_names = json.extract_test_cases_names(self.testcases)
         self.assertEqual(list_of_names, ['test/TestGET', 'test/TestPOST', 'test/TestPUT', 'test/TestDELETE'])
+
+    def test_load_json_creation_throws_exception(self):
+        """
+        Test if Exception is raised when test project
+        name argument is not supplied while creating the object
+        :return:
+        """
+        with self.assertRaises(Exception):
+            json = LoadJson()
+
+    def test_filtration_of_test_cases_names(self):
+        # filter list with keyword GET
+        # it will give you everything that contains
+        # the keyword "GET"
+        filtered_list = self.json.filter_test_cases("GET")
+        non_filtered_list = self.json.filter_test_cases(None)
+
+        # Assert
+        self.assertEqual(["test/TestGET"], filtered_list)
+        self.assertEqual(self.json.non_filtered_test_cases_names_list, non_filtered_list)

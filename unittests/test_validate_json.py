@@ -37,7 +37,8 @@ class ValidateJsonTestCase(unittest.TestCase):
         }"""
 
     def runTest(self):
-        pass
+        self.test_validate_json_good()
+        self.test_validate_json_bad()
 
     def test_validate_json_good(self):
         # Act

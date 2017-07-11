@@ -34,12 +34,12 @@ class ProcessRequests(object):
         3. make_request: MakeRequest object, that makes the requests
         4. validate_requests: ValidateRequest object, that validates the requests
     """
-    def __init__(self, project_name, verbose) -> None:
+    def __init__(self, project_name, verbose, filter_keyword=None) -> None:
         super().__init__()
 
         self.__project_name = project_name
         self.__verbose = verbose
-        self.__json_config = LoadJson(project_name)
+        self.__json_config = LoadJson(project_name, filter_keyword)
         self.__make_request = MakeRequests(self.__json_config)
 
         # send requests and collect responses
@@ -95,6 +95,10 @@ class ProcessRequests(object):
         for request, response in zip(requests, responses):
             # validation
             validation = ValidateJson(request.schema, response._result.json)
+
+            print("Testing controller : " + request.controller)
+            print("Method             : " + request.method)
+
             # simulate progress bar
             progress_bar.show()
 
