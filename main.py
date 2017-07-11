@@ -5,7 +5,13 @@ import sys
 
 if __name__ == "__main__":
 
+<<<<<<< HEAD
+    print("======================== RESTTestPY =============================")
+
+    # process = ProcessRequests("crystalpure", "-v");
+=======
     print("+++++++++ START ++++++++++")
+>>>>>>> 895d62543b920d8b0ecbf61b56e73bfb54758022
 
     # process = ProcessRequests("crystalpure", "-v")
 

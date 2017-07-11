@@ -39,7 +39,7 @@ class ProcessRequests(object):
 
         self.__project_name = project_name
         self.__verbose = verbose
-        self.__json_config = LoadJson(project_name)
+        self.__json_config = LoadJson(project_name, filter_keyword)
         self.__make_request = MakeRequests(self.__json_config)
 
         # send requests and collect responses
@@ -98,7 +98,10 @@ class ProcessRequests(object):
 
             print("Testing controller : " + request.controller)
             print("Method             : " + request.method)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 668b2f135ff8a19f8fd855787c94f52dc73c5af3
             # simulate progress bar
             progress_bar.show()
 
